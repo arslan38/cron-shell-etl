@@ -1,0 +1,1 @@
+* * * * * /scripts/pipeline.sh >> /var/log/etl/pipeline.log 2>&1

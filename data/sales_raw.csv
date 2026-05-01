@@ -1,0 +1,62 @@
+transaction_id,date,product,category,quantity,unit_price,region
+1,2024-01-15,Laptop,Electronics,2,999.99,Istanbul
+2,2024-01-15,Mouse,Electronics,10,29.99,Istanbul
+3,2024-01-15,Desk Chair,Furniture,3,249.99,Ankara
+4,2024-01-15,Notebook,Stationery,50,4.99,Izmir
+5,2024-01-16,Keyboard,Electronics,5,79.99,istanbul
+6,2024-01-16,Monitor,Electronics,2,349.99,ANKARA
+7,2024-01-16,Bookshelf,Furniture,1,189.99,Izmir
+8,2024-01-16,Pen Set,Stationery,30,12.99,Istanbul
+9,2024-01-17,Webcam,Electronics,,59.99,Ankara
+10,2024-01-17,Standing Desk,Furniture,2,599.99,izmir
+11,2024-01-17,Printer Paper,Stationery,100,8.99,Istanbul
+12,2024-01-17,Headphones,Electronics,4,149.99,Ankara
+13,2024-01-18,USB Hub,Electronics,8,24.99,Izmir
+14,2024-01-18,Filing Cabinet,Furniture,1,299.99,Istanbul
+15,2024-01-18,Stapler,Stationery,20,7.99,ISTANBUL
+16,2024-01-18,Tablet,Electronics,3,-199.99,Ankara
+17,2024-01-19,Mouse Pad,Electronics,15,14.99,Izmir
+18,2024-01-19,Desk Lamp,Furniture,6,44.99,Istanbul
+19,2024-01-19,Markers,Stationery,25,9.99,Ankara
+20,2024-01-19,External SSD,Electronics,4,119.99,izmir
+21,2024-01-20,Router,Electronics,3,89.99,Istanbul
+22,2024-01-20,Ergonomic Chair,Furniture,2,449.99,Ankara
+23,2024-01-20,Clipboard,Stationery,40,3.99,Izmir
+24,2024-01-20,Laptop Stand,Electronics,5,59.99,istanbul
+1,2024-01-15,Laptop,Electronics,2,999.99,Istanbul
+25,2024-01-21,Charger,Electronics,10,34.99,Ankara
+26,2024-01-21,Whiteboard,Furniture,2,129.99,Izmir
+27,2024-01-21,Sticky Notes,Stationery,60,5.99,Istanbul
+28,2024-01-21,Smartwatch,Electronics,3,249.99,ANKARA
+29,2024-01-22,Power Strip,Electronics,7,19.99,Izmir
+30,2024-01-22,Coat Rack,Furniture,1,79.99,Istanbul
+31,2024-01-22,Binder,Stationery,35,6.99,Ankara
+32,2024-01-22,Projector,Electronics,1,549.99,izmir
+33,2024-01-23,Cable Kit,Electronics,12,22.99,Istanbul
+34,2024-01-23,Side Table,Furniture,3,149.99,Ankara
+35,2024-01-23,Paper Clips,Stationery,,2.99,Izmir
+36,2024-01-23,Microphone,Electronics,2,89.99,Istanbul
+37,2024-01-24,Docking Station,Electronics,4,179.99,Ankara
+38,2024-01-24,Footrest,Furniture,5,39.99,IZMIR
+39,2024-01-24,Envelopes,Stationery,80,0.99,Istanbul
+40,2024-01-24,Speakers,Electronics,3,69.99,Ankara
+41,2024-01-25,Surge Protector,Electronics,6,29.99,Izmir
+42,2024-01-25,Monitor Arm,Furniture,2,119.99,Istanbul
+43,2024-01-25,Tape Dispenser,Stationery,15,8.99,ankara
+44,2024-01-25,Flash Drive,Electronics,20,14.99,Ankara
+45,2024-01-26,Ethernet Cable,Electronics,10,9.99,Izmir
+46,2024-01-26,Storage Bin,Furniture,4,34.99,Istanbul
+47,2024-01-26,Ruler Set,Stationery,25,3.49,Ankara
+48,2024-01-26,Graphics Card,Electronics,1,-399.99,Izmir
+49,2024-01-27,HDMI Cable,Electronics,8,12.99,Istanbul
+50,2024-01-27,Wall Shelf,Furniture,3,59.99,ANKARA
+51,2024-01-27,Glue Sticks,Stationery,40,1.99,Izmir
+52,2024-01-27,Portable Monitor,Electronics,2,229.99,Istanbul
+53,2024-01-28,Wireless Mouse,Electronics,6,39.99,Ankara
+54,2024-01-28,Trash Can,Furniture,3,24.99,Izmir
+55,2024-01-28,Scissors,Stationery,18,5.49,istanbul
+56,2024-01-28,NVMe SSD,Electronics,3,159.99,Istanbul
+57,2024-01-29,Webcam Stand,Electronics,4,19.99,Ankara
+58,2024-01-29,Plant Pot,Furniture,8,15.99,Izmir
+59,2024-01-29,Calculator,Stationery,10,24.99,Istanbul
+60,2024-01-29,USB-C Adapter,Electronics,5,27.99,ankara

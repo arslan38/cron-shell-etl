@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: etl-postgres
+    environment:
+      POSTGRES_USER: etl_user
+      POSTGRES_PASSWORD: etl_pass
+      POSTGRES_DB: etl_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etl_user -d etl_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  cron-worker:
+    build: .
+    container_name: etl-cron-worker
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: etl_db
+      POSTGRES_USER: etl_user
+      POSTGRES_PASSWORD: etl_pass
+
+volumes:
+  pgdata:
