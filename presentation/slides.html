@@ -13,30 +13,32 @@
             --r-link-color: #0f3460;
         }
         .reveal h1, .reveal h2, .reveal h3 { text-transform: none; }
-        .reveal h1 { font-size: 2.2em; }
-        .reveal h2 { font-size: 1.6em; }
-        .reveal h3 { font-size: 1.2em; }
-        .reveal p, .reveal li { font-size: 0.75em; line-height: 1.5; }
-        .reveal table { font-size: 0.6em; margin: 0 auto; }
-        .reveal th { background: #1a1a2e; color: #fff; padding: 8px 16px; }
-        .reveal td { padding: 6px 16px; border-bottom: 1px solid #ddd; }
-        .reveal pre { font-size: 0.55em; width: 90%; }
+        .reveal h1 { font-size: 1.8em; margin-bottom: 0.2em; }
+        .reveal h2 { font-size: 1.3em; margin-bottom: 0.3em; }
+        .reveal h3 { font-size: 0.9em; margin-bottom: 0.2em; }
+        .reveal p, .reveal li { font-size: 0.6em; line-height: 1.35; }
+        .reveal ul, .reveal ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+        .reveal table { font-size: 0.5em; margin: 0 auto; }
+        .reveal th { background: #1a1a2e; color: #fff; padding: 4px 10px; }
+        .reveal td { padding: 3px 10px; border-bottom: 1px solid #ddd; }
+        .reveal pre { font-size: 0.45em; width: 90%; margin: 0.3em auto; }
         .reveal code { font-family: 'Fira Code', 'Courier New', monospace; }
-        .cover-subtitle { font-size: 0.7em !important; color: #555; margin-top: 0.5em; }
+        .cover-subtitle { font-size: 0.6em !important; color: #555; margin-top: 0.3em; }
         .diagram-box {
-            background: #f4f4f8; border-radius: 12px; padding: 24px;
-            font-family: 'Fira Code', monospace; font-size: 0.6em;
-            line-height: 1.8; text-align: center; display: inline-block;
+            background: #f4f4f8; border-radius: 10px; padding: 10px 16px;
+            font-family: 'Fira Code', monospace; font-size: 0.5em;
+            line-height: 1.4; text-align: center; display: inline-block;
         }
         .highlight-box {
             background: #e8f4fd; border-left: 4px solid #0f3460;
-            padding: 12px 20px; margin: 16px auto; text-align: left;
-            font-size: 0.7em; max-width: 80%;
+            padding: 6px 14px; margin: 8px auto; text-align: left;
+            font-size: 0.58em; max-width: 85%;
         }
-        .two-col { display: flex; gap: 32px; align-items: flex-start; }
+        .highlight-box ul { margin: 4px 0; }
+        .two-col { display: flex; gap: 20px; align-items: flex-start; }
         .two-col > div { flex: 1; }
-        .slide-number { font-size: 0.5em; color: #999; }
-        .reveal .slides section { padding-top: 20px; }
+        .reveal .slides section { padding: 10px 20px; box-sizing: border-box; }
+        .reveal .slides { overflow: hidden; }
     </style>
 </head>
 <body>
@@ -77,14 +79,10 @@
                 </ul>
             </div>
         </div>
-        <div class="highlight-box" style="margin-top: 24px;">
-            <strong>Crontab syntax:</strong><br>
-            <code style="font-size:1.1em;">* * * * *  command</code><br>
-            <code style="font-size:0.9em;">| | | | +-- day of week (0-7)</code><br>
-            <code style="font-size:0.9em;">| | | +---- month (1-12)</code><br>
-            <code style="font-size:0.9em;">| | +------ day of month (1-31)</code><br>
-            <code style="font-size:0.9em;">| +-------- hour (0-23)</code><br>
-            <code style="font-size:0.9em;">+---------- minute (0-59)</code>
+        <div class="highlight-box" style="margin-top: 10px;">
+            <strong>Crontab syntax:</strong>
+            <code style="font-size:1em;">* * * * *  command</code><br>
+            <code style="font-size:0.85em;">| | | | +-- day of week &nbsp; | | | +---- month &nbsp; | | +------ day of month &nbsp; | +-------- hour &nbsp; +---------- minute</code>
         </div>
     </section>
 
@@ -154,30 +152,21 @@
     <section>
         <h2>Demo Architecture</h2>
         <div class="diagram-box">
-            <pre style="text-align:left; font-size:1em; background:none; box-shadow:none; margin:0;">
-Docker Compose
+            <pre style="text-align:left; font-size:1em; background:none; box-shadow:none; margin:0; line-height:1.3;">
 +------------------------------------------+
-|  cron-worker container (ubuntu:22.04)    |
-|                                          |
+|  cron-worker (ubuntu:22.04)              |
 |  cron daemon (every minute)              |
 |       |                                  |
 |       v                                  |
 |  pipeline.sh                             |
-|       |                                  |
 |       +---> extract.sh  (CSV -> batch)   |
-|       |         watermark tracking       |
-|       |                                  |
 |       +---> transform.sh (awk cleanup)   |
-|       |         filter, dedupe, agg      |
-|       |                                  |
 |       +---> load.sh     (psql upsert)    |
 |                   |                      |
 +-------------------|----------------------+
-                    |
                     v
 +------------------------------------------+
-|  postgres container (postgres:15-alpine) |
-|                                          |
+|  postgres (15-alpine)                    |
 |  sales_summary  |  etl_log               |
 +------------------------------------------+</pre>
         </div>
@@ -189,7 +178,7 @@ Docker Compose
         <p>Single command to build and run the entire pipeline:</p>
         <pre><code>docker-compose up --build</code></pre>
 
-        <div class="two-col" style="margin-top: 20px;">
+        <div class="two-col" style="margin-top: 8px;">
             <div>
                 <h3>Dockerfile highlights</h3>
                 <ul>
@@ -209,7 +198,7 @@ Docker Compose
                 </ul>
             </div>
         </div>
-        <div class="highlight-box" style="margin-top: 12px;">
+        <div class="highlight-box" style="margin-top: 6px;">
             <strong>Key pitfall solved:</strong> Cron does not inherit container environment variables.
             The entrypoint dumps <code>printenv</code> to <code>/etc/environment</code> so cron jobs
             can access POSTGRES_HOST, POSTGRES_PASSWORD, etc.
@@ -222,19 +211,13 @@ Docker Compose
         <div class="two-col">
             <div>
                 <h3>Pipeline log output</h3>
-                <pre><code>=========================================
-[PIPELINE] Run started at 10:01:00
-=========================================
-[EXTRACT] Extracted 10 rows
-         (lines 2-11)
+                <pre><code>[PIPELINE] Run started at 10:01:00
+[EXTRACT] Extracted 10 rows (lines 2-11)
 [TRANSFORM] Produced 4 aggregated rows
 [LOAD] Loaded 4 rows into sales_summary
-=========================================
-[PIPELINE] Run completed at 10:01:01
-=========================================</code></pre>
-                <p style="font-size:0.65em;">After all data is processed:</p>
-                <pre><code>[EXTRACT] No new data to extract.
-          Watermark=61, DataLines=60
+[PIPELINE] Run completed at 10:01:01</code></pre>
+                <p style="font-size:0.55em;">After all data processed:</p>
+                <pre><code>[EXTRACT] No new data. Watermark=61
 [PIPELINE] No new data.</code></pre>
             </div>
             <div>
@@ -245,14 +228,12 @@ Docker Compose
  2024-01-15 | Furniture   |   3 |  749.97
  2024-01-15 | Stationery  |  50 |  249.50
  2024-01-16 | Electronics |   7 |  509.93
- ...
-
-ETL Log:
- run_at              | status  | rows
----------------------+---------+-----
- 2024-01-15 10:07:00 | SUCCESS |   3
- 2024-01-15 10:06:00 | SUCCESS |   4
  ...</code></pre>
+                <pre><code>ETL Log:
+ run_at       | status  | rows
+--------------+---------+-----
+ 10:07:00     | SUCCESS |   3
+ 10:06:00     | SUCCESS |   4</code></pre>
             </div>
         </div>
     </section>
@@ -263,7 +244,7 @@ ETL Log:
         <div class="two-col">
             <div>
                 <h3>File structure</h3>
-                <pre style="font-size:0.95em;"><code>cron-shell-etl/
+                <pre style="font-size:0.85em;"><code>cron-shell-etl/
 +-- docker-compose.yml
 +-- Dockerfile
 +-- entrypoint.sh
@@ -296,7 +277,7 @@ ETL Log:
     <!-- Slide 10: References -->
     <section>
         <h2>References</h2>
-        <ul style="font-size:0.7em; line-height:2;">
+        <ul style="font-size:0.55em; line-height:1.8;">
             <li>Paul Vixie, <em>Vixie Cron</em>, 1987 -- <a href="https://github.com/vixie/cron">github.com/vixie/cron</a></li>
             <li>GNU Bash Manual -- <a href="https://www.gnu.org/software/bash/manual/">gnu.org/software/bash/manual</a></li>
             <li>crontab.guru -- Interactive cron schedule editor -- <a href="https://crontab.guru">crontab.guru</a></li>
