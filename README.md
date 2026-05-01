@@ -25,7 +25,7 @@ cd cron-shell-etl
 docker-compose up --build
 ```
 
-The pipeline processes 10 rows per minute from `data/sales_raw.csv`. After ~6-7 minutes all 60 rows will be processed. Watch the logs:
+The pipeline processes 10 rows per minute from `data/sales_raw.csv`. After ~7 minutes all 61 rows will be processed. Watch the logs:
 
 ```bash
 docker-compose logs -f cron-worker
@@ -37,26 +37,25 @@ docker-compose logs -f cron-worker
 
 ```
 =========================================
-[PIPELINE] Run started at 2024-01-15 10:01:00
+[PIPELINE] Run started at 2026-05-01 19:15:01
 =========================================
 [PIPELINE] Starting extract...
 [EXTRACT] Extracted 10 rows (lines 2-11) -> /tmp/extracted.csv
 [PIPELINE] Starting transform...
-[TRANSFORM] Produced 4 aggregated rows -> /tmp/transformed.csv
+[TRANSFORM] Produced 7 aggregated rows -> /tmp/transformed.csv
 [PIPELINE] Starting load...
-[LOAD] Loaded 4 rows into sales_summary.
+[LOAD] Loaded 7 rows into sales_summary.
 =========================================
-[PIPELINE] Run completed at 2024-01-15 10:01:01
+[PIPELINE] Run completed at 2026-05-01 19:15:01
 =========================================
 ```
 
 After all rows are processed:
 
 ```
-[PIPELINE] Run started at 2024-01-15 10:08:00
 [PIPELINE] Starting extract...
-[EXTRACT] No new data to extract. Watermark=61, DataLines=60
-[PIPELINE] No new data. Pipeline complete at 2024-01-15 10:08:00
+[EXTRACT] No new data to extract. Watermark=62, DataLines=61
+[PIPELINE] No new data. Pipeline complete.
 ```
 
 ### Query results
@@ -67,11 +66,12 @@ docker exec -it etl-postgres psql -U etl_user -d etl_db \
 ```
 
 ```
- sale_date  |  category   | total_qty | total_amount |         loaded_at
-------------+-------------+-----------+--------------+----------------------------
- 2024-01-15 | Electronics |        12 |      2059.88 | 2024-01-15 10:01:01.123456
- 2024-01-15 | Furniture   |         3 |       749.97 | 2024-01-15 10:01:01.123456
- 2024-01-15 | Stationery  |        50 |       249.50 | 2024-01-15 10:01:01.123456
+ sale_date  |  category   | total_qty | total_amount
+------------+-------------+-----------+--------------
+ 2024-01-15 | Electronics |        14 |      4299.86
+ 2024-01-15 | Furniture   |         3 |       749.97
+ 2024-01-15 | Stationery  |        50 |       249.50
+ 2024-01-16 | Electronics |         7 |      1099.93
  ...
 ```
 

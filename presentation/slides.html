@@ -21,7 +21,7 @@
         .reveal table { font-size: 0.5em; margin: 0 auto; }
         .reveal th { background: #1a1a2e; color: #fff; padding: 4px 10px; }
         .reveal td { padding: 3px 10px; border-bottom: 1px solid #ddd; }
-        .reveal pre { font-size: 0.45em; width: 90%; margin: 0.3em auto; }
+        .reveal pre { font-size: 0.45em; width: 90%; margin: 0.3em auto; max-height: none; overflow: visible; }
         .reveal code { font-family: 'Fira Code', 'Courier New', monospace; }
         .cover-subtitle { font-size: 0.6em !important; color: #555; margin-top: 0.3em; }
         .diagram-box {
@@ -211,29 +211,31 @@
         <div class="two-col">
             <div>
                 <h3>Pipeline log output</h3>
-                <pre><code>[PIPELINE] Run started at 10:01:00
+                <pre><code>[PIPELINE] Run started at 19:15:01
 [EXTRACT] Extracted 10 rows (lines 2-11)
-[TRANSFORM] Produced 4 aggregated rows
-[LOAD] Loaded 4 rows into sales_summary
-[PIPELINE] Run completed at 10:01:01</code></pre>
+[TRANSFORM] Produced 7 aggregated rows
+[LOAD] Loaded 7 rows into sales_summary
+[PIPELINE] Run completed at 19:15:01</code></pre>
                 <p style="font-size:0.55em;">After all data processed:</p>
-                <pre><code>[EXTRACT] No new data. Watermark=61
+                <pre><code>[EXTRACT] No new data. Watermark=62
 [PIPELINE] No new data.</code></pre>
             </div>
             <div>
                 <h3>PostgreSQL query result</h3>
                 <pre><code> sale_date  | category    | qty | amount
 ------------+-------------+-----+--------
- 2024-01-15 | Electronics |  12 | 2059.88
+ 2024-01-15 | Electronics |  14 | 4299.86
  2024-01-15 | Furniture   |   3 |  749.97
  2024-01-15 | Stationery  |  50 |  249.50
- 2024-01-16 | Electronics |   7 |  509.93
+ 2024-01-16 | Electronics |   7 | 1099.93
  ...</code></pre>
                 <pre><code>ETL Log:
- run_at       | status  | rows
---------------+---------+-----
- 10:07:00     | SUCCESS |   3
- 10:06:00     | SUCCESS |   4</code></pre>
+ status  | rows_loaded
+---------+-------------
+ SUCCESS |           1
+ SUCCESS |           9
+ SUCCESS |           8
+ SUCCESS |           7</code></pre>
             </div>
         </div>
     </section>
@@ -244,22 +246,16 @@
         <div class="two-col">
             <div>
                 <h3>File structure</h3>
-                <pre style="font-size:0.85em;"><code>cron-shell-etl/
-+-- docker-compose.yml
-+-- Dockerfile
-+-- entrypoint.sh
-+-- crontab
-+-- data/
-|   +-- sales_raw.csv
+                <pre style="font-size:0.7em; max-height:none; overflow:visible;"><code>cron-shell-etl/
++-- Dockerfile, docker-compose.yml
++-- entrypoint.sh, crontab
++-- data/sales_raw.csv
 +-- scripts/
 |   +-- pipeline.sh
 |   +-- extract.sh
 |   +-- transform.sh
 |   +-- load.sh
-+-- sql/
-|   +-- init.sql
-+-- presentation/
-    +-- slides.html</code></pre>
++-- sql/init.sql</code></pre>
             </div>
             <div>
                 <h3>Design decisions</h3>
